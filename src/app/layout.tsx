@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import DarkModeProvider from "./DarkModeProvider";
+import TopNav from "./components/TopNav";
+import DarkModeToggleFloating from "./components/DarkModeToggleFloating";
+import { ReactNode } from "react";
+import ClientLayout from "./components/ClientLayout";
+import ChatWidget from "./components/ChatWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,14 +26,20 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <DarkModeProvider>
+          <TopNav />
+          <DarkModeToggleFloating />
+          {/* Main content with padding to not be hidden behind navbar */}
+          <ClientLayout>{children}</ClientLayout>
+          <ChatWidget />
+        </DarkModeProvider>
       </body>
     </html>
   );
