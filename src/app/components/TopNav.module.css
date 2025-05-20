@@ -122,10 +122,13 @@
     top: 60px;
     right: 0;
     width: 100vw;
-    background: inherit;
+    background: #f5f5fa;
     border-bottom: inherit;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     z-index: 99;
     padding-bottom: 1rem;
+  }
+  .dark .mobileLinks {
+    background: #181825;
   }
 }
