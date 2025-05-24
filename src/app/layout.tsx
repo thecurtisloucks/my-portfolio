@@ -39,6 +39,13 @@ export default function RootLayout({
           {/* Main content with padding to not be hidden behind navbar */}
           <ClientLayout>{children}</ClientLayout>
           <ChatWidget />
+          {/* Bottom left CL logo */}
+          <img
+            src="/cl.svg"
+            alt="CL Logo"
+            className="fixed bottom-4 left-4 w-12 h-12 z-40 opacity-80 hover:opacity-100 transition-opacity"
+            draggable="false"
+          />
         </DarkModeProvider>
       </body>
     </html>

@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useDarkMode } from "../DarkModeProvider";
-import styles from "../Home.module.css";
 import Header from "../components/Header";
+import LetsConnectButton from "../components/LetsConnectButton";
 
 const experiences = [
   {
@@ -53,89 +53,123 @@ const experiences = [
 
 const Experience = () => {
   const { darkMode } = useDarkMode();
+  const [step, setStep] = useState(0);
+  const total = experiences.length;
+  const exp = experiences[step];
   return (
     <div
       data-darkmode={darkMode ? "on" : "off"}
-      className={
-        styles.homeWrapper + (darkMode ? ` ${styles.dark}` : ` ${styles.light}`)
-      }
+      className="w-full max-w-[900px] flex flex-col items-center mx-auto"
     >
-      <div className={styles.headerSection}>
+      {/* Status Bar */}
+      <div
+        className={`w-full max-w-[1100px] mx-auto mb-4 mt-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-2 px-8 py-4 shadow-xl font-medium border text-base ${
+          darkMode
+            ? "bg-gradient-to-br from-[#232350] via-[#181825] to-[#232350] border-[#333355] text-[#b0b0ff]"
+            : "bg-gradient-to-br from-[#e0e0f7] via-[#f5f5fa] to-[#e0e0f7] border-[#ccccdd] text-[#232339]"
+        }`}
+      >
+        <span>
+          <span className="font-semibold">Current:</span> Full Stack Developer @
+          Renov-AI Technology Inc.
+        </span>
+        <span className="flex items-center gap-2">
+          <span className="hidden sm:inline">
+            Open to new opportunities & consulting.
+          </span>
+          <LetsConnectButton className="ml-2 whitespace-nowrap min-w-[170px] h-[48px] flex items-center justify-center">
+            Contact Me →
+          </LetsConnectButton>
+        </span>
+      </div>
+      <div className="w-full max-w-[1100px] flex flex-col items-center">
         <Header />
         <p
-          className={
-            styles.tagline +
-            (darkMode ? ` ${styles.taglineDark}` : ` ${styles.taglineLight}`)
-          }
+          className={`text-[1.2rem] text-center mb-8 ${
+            darkMode ? "text-[#b0b0ff]" : "text-[#444466]"
+          }`}
         >
           Experience
         </p>
       </div>
-      <div className={styles.projectsGrid}>
-        {experiences.map((exp, index) => (
-          <div
-            key={index}
-            className={
-              styles.projectCard +
-              (darkMode
-                ? ` ${styles.projectCardDark}`
-                : ` ${styles.projectCardLight}`)
-            }
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.25rem",
-                marginBottom: "0.5rem",
-              }}
+      {/* Stepper Experience Card */}
+      <div className="w-full max-w-[1100px] flex flex-col items-center">
+        <div
+          className={`p-8 rounded-2xl shadow-xl flex flex-col transition-colors duration-300 border w-full mt-4 ${
+            darkMode
+              ? "bg-gradient-to-br from-[#232350] via-[#181825] to-[#232350] border-[#333355] text-[#e0e0e0]"
+              : "bg-gradient-to-br from-[#e0e0f7] via-[#f5f5fa] to-[#e0e0f7] border-[#ccccdd] text-[#232339]"
+          }`}
+        >
+          <div className="flex flex-col gap-1 mb-2">
+            <h2
+              className={`text-lg font-bold ${
+                darkMode ? "text-[#b0b0ff]" : "text-[#232339]"
+              }`}
             >
-              <h2
-                className={
-                  styles.projectTitle +
-                  (darkMode
-                    ? ` ${styles.projectTitleDark}`
-                    : ` ${styles.projectTitleLight}`)
-                }
-                style={{ fontSize: "1.3rem" }}
-              >
-                {exp.role} — {exp.company}
-              </h2>
-              <p className={styles.projectTech}>{exp.duration}</p>
-            </div>
-            <ul style={{ marginBottom: "0.75rem", paddingLeft: "1.2em" }}>
-              {exp.description.map((line, i) => (
-                <li
-                  key={i}
-                  style={{
-                    color: darkMode ? "#b0b0b0" : "#444466",
-                    fontSize: "1.05rem",
-                    marginBottom: "0.25rem",
-                  }}
-                >
-                  {line}
-                </li>
-              ))}
-            </ul>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-              {exp.tags.map((tag, i) => (
-                <span
-                  key={i}
-                  style={{
-                    background: darkMode ? "#232350" : "#e0e0f7",
-                    color: darkMode ? "#b0b0ff" : "#232339",
-                    fontSize: "0.95rem",
-                    fontWeight: 500,
-                    padding: "0.25rem 0.75rem",
-                    borderRadius: "999px",
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+              {exp.role} — {exp.company}
+            </h2>
+            <p className="text-sm font-medium">{exp.duration}</p>
           </div>
-        ))}
+          <ul className="mb-3 pl-5 list-disc">
+            {exp.description.map((line, i) => (
+              <li
+                key={i}
+                className={`text-[1.05rem] mb-1 ${
+                  darkMode ? "text-[#b0b0b0]" : "text-[#444466]"
+                }`}
+              >
+                {line}
+              </li>
+            ))}
+          </ul>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {exp.tags.map((tag, i) => (
+              <span
+                key={i}
+                className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  darkMode
+                    ? "bg-[#232350] text-[#b0b0ff]"
+                    : "bg-[#e0e0f7] text-[#232339]"
+                }`}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          {/* Stepper Controls */}
+          <div className="flex justify-between items-center mt-2">
+            <button
+              onClick={() => setStep((s) => Math.max(0, s - 1))}
+              disabled={step === 0}
+              className={`px-4 py-2 rounded font-semibold transition-colors border mr-2 ${
+                step === 0
+                  ? "opacity-50 cursor-not-allowed"
+                  : darkMode
+                  ? "bg-[#232350] border-[#333355] text-[#b0b0ff] hover:bg-[#333355]"
+                  : "bg-[#e0e0f7] border-[#ccccdd] text-[#232339] hover:bg-[#ccccdd]"
+              }`}
+            >
+              Previous
+            </button>
+            <span className="text-sm font-mono">
+              {step + 1} / {total}
+            </span>
+            <button
+              onClick={() => setStep((s) => Math.min(total - 1, s + 1))}
+              disabled={step === total - 1}
+              className={`px-4 py-2 rounded font-semibold transition-colors border ml-2 ${
+                step === total - 1
+                  ? "opacity-50 cursor-not-allowed"
+                  : darkMode
+                  ? "bg-[#232350] border-[#333355] text-[#b0b0ff] hover:bg-[#333355]"
+                  : "bg-[#e0e0f7] border-[#ccccdd] text-[#232339] hover:bg-[#ccccdd]"
+              }`}
+            >
+              Next
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

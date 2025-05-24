@@ -2,195 +2,60 @@
 
 import { useDarkMode } from "./DarkModeProvider";
 import Header from "./components/Header";
-import styles from "./Home.module.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
-
-const stuff = [
-  {
-    title: "AI-Powered Web App",
-    description: "A document summarizer using React and FastAPI.",
-    tech: ["Python", "FastAPI", "React", "OpenAI API"],
-    link: "#",
-  },
-  {
-    title: "Real-Time Chat Tool",
-    description: "A real-time collaboration tool using Elixir and Phoenix.",
-    tech: ["Elixir", "Phoenix", "LiveView"],
-    link: "#",
-  },
-  {
-    title: "Web3 DApp",
-    description: "A decentralized app using Solidity and Next.js.",
-    tech: ["Solidity", "Web3.js", "Next.js", "IPFS"],
-    link: "#",
-  },
-  {
-    title: "3D Visualization App",
-    description: "Interactive 3D viewer with Flutter and Unity.",
-    tech: ["Flutter", "Unity", "WebGL"],
-    link: "#",
-  },
-  {
-    title: "Data Engineering Pipeline",
-    description: "Streaming + batch processing using Scala and Spark.",
-    tech: ["Scala", "Apache Spark", "Kafka"],
-    link: "#",
-  },
-  {
-    title: "Edge AI + WASM",
-    description: "AI model inference in browser using Rust + WebAssembly.",
-    tech: ["Rust", "WASM", "TensorFlow Lite"],
-    link: "#",
-  },
-  {
-    title: "DevOps CI/CD Dashboard",
-    description:
-      "Live dashboard showing builds, test results, and deploy status.",
-    tech: ["Node.js", "Docker", "GitHub Actions", "React"],
-    link: "#",
-  },
-  {
-    title: "Serverless Expense Tracker",
-    description:
-      "A budget tracker with serverless backend and real-time updates.",
-    tech: ["AWS Lambda", "DynamoDB", "React"],
-    link: "#",
-  },
-  {
-    title: "AI-Powered Resume Analyzer",
-    description: "Upload a resume and get job-fit scores using NLP.",
-    tech: ["Python", "Streamlit"],
-    link: "#",
-  },
-  {
-    title: "AI Art Generator Web App",
-    description:
-      "Generate unique artwork using AI models like Stable Diffusion.",
-    tech: ["Vite", "TypeScript", "Replicate API"],
-    link: "#",
-  },
-  {
-    title: "Custom VS Code Extension",
-    description:
-      "A productivity tool like a custom color picker or linter plugin.",
-    tech: ["TypeScript", "Node.js"],
-    link: "#",
-  },
-  {
-    title: "Next.js SaaS Starter",
-    description: "Boilerplate SaaS app with auth, billing, and dashboard.",
-    tech: ["Next.js", "Stripe", "Prisma"],
-    link: "#",
-  },
-  {
-    title: "GraphQL Social Feed App",
-    description: "A social feed app with GraphQL and real-time updates.",
-    tech: ["Apollo", "Hasura", "Svelte"],
-    link: "#",
-  },
-  {
-    title: "AR Furniture Preview App",
-    description: "Preview furniture in your room using AR.",
-    tech: ["Unity", "AR Foundation"],
-    link: "#",
-  },
-  {
-    title: "Blockchain Explorer Dashboard",
-    description: "Visualize blockchain activity and token info.",
-    tech: ["React", "Ethers.js", "The Graph"],
-    link: "#",
-  },
-  {
-    title: "Open Source Contribution Showcase",
-    description: "Display your PRs, issues, and starred projects beautifully.",
-    tech: ["GitHub API", "Astro"],
-    link: "#",
-  },
-];
+import LetsConnectButton from "./components/LetsConnectButton";
 
 export default function Home() {
   const { darkMode } = useDarkMode();
-  useEffect(() => {
-    AOS.init({ duration: 800 });
-  }, []);
 
   return (
     <div
       data-darkmode={darkMode ? "on" : "off"}
-      className={
-        styles.homeWrapper + (darkMode ? ` ${styles.dark}` : ` ${styles.light}`)
-      }
+      className={`fixed top-0 left-0 w-screen h-screen min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300 overflow-y-auto ${
+        darkMode ? "bg-[#181825] text-[#e0e0e0]" : "bg-[#f5f5fa] text-[#181825]"
+      }`}
     >
-      <div className={styles.headerSection}>
+      <div className="w-full max-w-[900px] flex flex-col items-center">
         <Header />
         <p
-          className={
-            styles.tagline +
-            (darkMode ? ` ${styles.taglineDark}` : ` ${styles.taglineLight}`)
-          }
+          className={`text-[1.2rem] text-center mb-8 ${
+            darkMode ? "text-[#b0b0ff]" : "text-[#444466]"
+          }`}
         >
           Full Stack Developer • AI + Web3 Enthusiast
         </p>
       </div>
-      <div className={styles.projectsGrid}>
-        {stuff.map((project) => (
-          <div
-            key={project.title}
-            className={
-              styles.projectCard +
-              (darkMode
-                ? ` ${styles.projectCardDark}`
-                : ` ${styles.projectCardLight}`)
-            }
-          >
-            <h2
-              className={
-                styles.projectTitle +
-                (darkMode
-                  ? ` ${styles.projectTitleDark}`
-                  : ` ${styles.projectTitleLight}`)
-              }
-            >
-              {project.title}
-            </h2>
-            <p
-              className={
-                styles.projectDesc +
-                (darkMode
-                  ? ` ${styles.projectDescDark}`
-                  : ` ${styles.projectDescLight}`)
-              }
-            >
-              {project.description}
-            </p>
-            <p
-              className={
-                styles.projectTech +
-                (darkMode
-                  ? ` ${styles.projectTechDark}`
-                  : ` ${styles.projectTechLight}`)
-              }
-            >
-              {project.tech.join(" • ")}
-            </p>
-            <a
-              href={project.link}
-              className={
-                styles.projectLink +
-                (darkMode
-                  ? ` ${styles.projectLinkDark}`
-                  : ` ${styles.projectLinkLight}`)
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View project →
-            </a>
-          </div>
-        ))}
-      </div>
+      {/* About Me Section Only */}
+      <section
+        className={`w-full max-w-[900px] mx-auto rounded-2xl p-8 shadow-xl border flex flex-col items-center text-center relative overflow-hidden min-h-[400px] ${
+          darkMode
+            ? "bg-gradient-to-br from-[#232350] via-[#181825] to-[#232350] border-[#333355] text-[#e0e0e0]"
+            : "bg-gradient-to-br from-[#e0e0f7] via-[#f5f5fa] to-[#e0e0f7] border-[#ccccdd] text-[#232339]"
+        }`}
+      >
+        <h2 className="text-3xl font-extrabold mb-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          About Me
+        </h2>
+        <p className="text-lg sm:text-xl mb-4">
+          Hi, I&apos;m <span className="font-semibold">Curtis Loucks</span> — a
+          full-stack developer passionate about building beautiful, scalable
+          digital experiences that make a difference.
+        </p>
+        <p className="text-base sm:text-lg mb-4">
+          I thrive at the intersection of innovation and practicality, with
+          hands-on experience developing apps that serve real-world needs — from
+          AI-driven renovation platforms to cross-platform social tools.
+          I&apos;ve worked across diverse teams and tech stacks, always focusing
+          on clean architecture, collaborative workflows, and measurable impact.
+        </p>
+        <p className="text-base sm:text-lg mb-6">
+          My toolkit includes <strong>React</strong>, <strong>Flutter</strong>,{" "}
+          <strong>Node.js</strong>, <strong>Python</strong>,{" "}
+          <strong>Unity</strong>, and more. I love experimenting with new tech,
+          3D, and AI. I&apos;m always open to new opportunities, collaborations,
+          and freelance projects.
+        </p>
+        <LetsConnectButton />
+      </section>
     </div>
   );
 }

@@ -7,15 +7,9 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
   return (
     <div
       data-darkmode={darkMode ? "on" : "off"}
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "1rem",
-        transition: "background 0.3s, color 0.3s",
-        paddingTop: 60,
-      }}
+      className={`min-h-screen flex flex-col items-center pt-[60px] p-4 transition-colors duration-300 ${
+        darkMode ? "bg-[#181825] text-[#e0e0e0]" : "bg-[#f5f5fa] text-[#181825]"
+      }`}
     >
       {children}
     </div>

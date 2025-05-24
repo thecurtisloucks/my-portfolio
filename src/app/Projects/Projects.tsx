@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { useDarkMode } from "../DarkModeProvider";
-import styles from "../Home.module.css";
 import Header from "../components/Header";
+import Card from "../components/Card";
 
 const projects = [
   {
@@ -40,6 +40,20 @@ const projects = [
       "Personal portfolio and dev utilities built with React and Tailwind. Clean UI design, responsive layouts, and real-world project insights.",
     tags: ["React", "Tailwind", "Portfolio"],
   },
+  {
+    title: "ServiceNow IT Automation",
+    timeline: "2019 – 2020",
+    description:
+      "Created Java automation scripts for internal tools at WestJet. Supported Jira, CI/CD tools, and documented ServiceNow workflows. Attended CAB meetings and on-call rotations.",
+    tags: ["Java", "ServiceNow", "CI/CD", "IT Automation", "Jira"],
+  },
+  {
+    title: "Cloud Infrastructure & App Monitoring",
+    timeline: "2021 – 2025",
+    description:
+      "Monitored and supported cloud apps using GCP tools including Logs Explorer and Cloud Functions. Integrated monitoring and debugging tools into CI/CD pipelines.",
+    tags: ["Google Cloud", "Logs Explorer", "Monitoring", "CI/CD"],
+  },
 ];
 
 const Projects = () => {
@@ -47,71 +61,51 @@ const Projects = () => {
   return (
     <div
       data-darkmode={darkMode ? "on" : "off"}
-      className={
-        styles.homeWrapper + (darkMode ? ` ${styles.dark}` : ` ${styles.light}`)
-      }
+      className="w-full max-w-[1100px] flex flex-col items-center mx-auto"
     >
-      <div className={styles.headerSection}>
+      <div className="w-full max-w-[1100px] flex flex-col items-center mt-12">
         <Header />
         <p
-          className={
-            styles.tagline +
-            (darkMode ? ` ${styles.taglineDark}` : ` ${styles.taglineLight}`)
-          }
+          className={`text-[1.2rem] text-center mb-8 ${
+            darkMode ? "text-[#b0b0ff]" : "text-[#444466]"
+          }`}
         >
           Projects
         </p>
       </div>
-      <div className={styles.projectsGrid}>
+      <div className="w-full max-w-[1100px] grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, index) => (
-          <div
-            key={index}
-            className={
-              styles.projectCard +
-              (darkMode
-                ? ` ${styles.projectCardDark}`
-                : ` ${styles.projectCardLight}`)
-            }
-          >
+          <Card key={index} darkMode={darkMode}>
             <h2
-              className={
-                styles.projectTitle +
-                (darkMode
-                  ? ` ${styles.projectTitleDark}`
-                  : ` ${styles.projectTitleLight}`)
-              }
+              className={`text-lg font-bold mb-2 ${
+                darkMode ? "text-[#b0b0ff]" : "text-[#232339]"
+              }`}
             >
               {project.title}
             </h2>
-            <p className={styles.projectTech}>{project.timeline}</p>
+            <p className="text-sm mb-1 font-medium">{project.timeline}</p>
             <p
-              className={
-                styles.projectDesc +
-                (darkMode
-                  ? ` ${styles.projectDescDark}`
-                  : ` ${styles.projectDescLight}`)
-              }
+              className={`mb-2 ${
+                darkMode ? "text-[#b0b0b0]" : "text-[#444466]"
+              }`}
             >
               {project.description}
             </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+            <div className="flex flex-wrap gap-2 mb-2">
               {project.tags.map((tag, i) => (
                 <span
                   key={i}
-                  style={{
-                    background: darkMode ? "#232350" : "#e0e0f7",
-                    color: darkMode ? "#b0b0ff" : "#232339",
-                    fontSize: "0.95rem",
-                    fontWeight: 500,
-                    padding: "0.25rem 0.75rem",
-                    borderRadius: "999px",
-                  }}
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${
+                    darkMode
+                      ? "bg-[#232350] text-[#b0b0ff]"
+                      : "bg-[#e0e0f7] text-[#232339]"
+                  }`}
                 >
                   {tag}
                 </span>
               ))}
             </div>
-          </div>
+          </Card>
         ))}
       </div>
     </div>
